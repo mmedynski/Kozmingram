@@ -1,38 +1,26 @@
 import React from "react";
-import { FaHome, FaCompass } from "react-icons/fa";
-import {
-  Container,
-  NavMenu,
-  NavLink,
-  NavIcon,
-  NavItem,
-  NavLogo,
-  NavLogoContainer,
-} from "./NavBar.styled";
+import { navItems } from "../../constans/navItems";
+import "./style.css";
+import { Link } from "react-router-dom";
 
 const Navigation = () => {
-  const navItems = [
-    { path: "/", icon: <FaHome />, key: "home" },
-    { path: "/explore", icon: <FaCompass />, key: "explore" },
-  ];
-
   return (
-    <Container>
-      <NavLogoContainer>
-        <NavLogo>Kozmingram</NavLogo>
-      </NavLogoContainer>
-      <NavMenu>
+    <div className="container">
+      <div className="navLogoContainer">
+        <h1 className="navLogo">Kozmingram</h1>
+      </div>
+      <ul className="navMenu">
         {navItems.map((navItem) => {
           return (
-            <NavItem key={navItem.key}>
-              <NavLink to={navItem.path}>
-                <NavIcon>{navItem.icon} </NavIcon>
-              </NavLink>
-            </NavItem>
+            <li className="navItem" key={navItem.key}>
+              <Link className="navLink" to={navItem.path}>
+                <div className="navIcon">{navItem.icon} </div>
+              </Link>
+            </li>
           );
         })}
-      </NavMenu>
-    </Container>
+      </ul>
+    </div>
   );
 };
 

@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+
 import "./style.css";
+import { client } from "../../constans/client";
 
 const Explore = () => {
   const [photos, setPhotos] = useState([]);
   async function getPhotos() {
     try {
-      const response = await axios.get(
-        "https://jsonplaceholder.typicode.com/photos",
-        { params: { _limit: 100 } }
-      );
+      const response = await client.get("/photos", { params: { _limit: 100 } });
       setPhotos(response.data);
     } catch (error) {
       console.error(error);
@@ -23,7 +21,9 @@ const Explore = () => {
     <div className="explore__wrapper">
       <div className="grid">
         {photos.map((photo) => {
-          return <img className="photo" src={photo.url} alt="" />;
+          return (
+            <img key={photo.id} className="photo" src={photo.url} alt="" />
+          );
         })}
       </div>
     </div>
